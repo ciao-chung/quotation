@@ -2,17 +2,25 @@
   <div class="products">
     <h3>服務項目</h3>
 
-    <ProductItem v-for="product, index in products"
-      @updateProduct="updateProduct"
-      :key="index"
-      :index="index"
-      :product="product"></ProductItem>
+    <div class="form-group">
+      <button class="btn btn-info" @click="createDefaultProduct(true)">新增服務</button>
+    </div>
+
+    <VueDraggable v-model="products" :options="draggableOptions">
+      <ProductItem v-for="product, index in products"
+        @updateProduct="updateProduct"
+        @removeProduct="removeProduct"
+        :key="index"
+        :index="index"
+        :product="product"></ProductItem>
+    </VueDraggable>
   </div>
 </template>
 
 <script lang="babel" type="text/babel">
 import localStorage from 'Libs/Storage/localStorage.js'
 import ProductItem from 'Modules/Base/ProductItem.vue'
+import VueDraggable from 'vuedraggable'
 export default {
   data() {
     return {
@@ -33,10 +41,13 @@ export default {
         this.products = _cloneDeep(this.storeProducts)
       }
 
-      if(this.productQuantity == 0) this.createDefaultProduct()
+      this.$nextTick(() => {
+        if(this.productQuantity == 0) this.createDefaultProduct()
+      })
     },
-    createDefaultProduct() {
+    createDefaultProduct(notify = false) {
       this.products.push(this.getDefaultProduct())
+      if(notify) this.$notify('新增成功')
     },
     getDefaultProduct() {
       return {
@@ -50,6 +61,13 @@ export default {
     updateProduct(data) {
       this.$set(this.products, data.index, data.product)
     },
+    removeProduct(index) {
+      this.$delete(this.products, index)
+      this.$notify({
+        style: 'success',
+        title: '刪除成功',
+      })
+    },
   },
   computed: {
     storeProducts() {
@@ -58,6 +76,11 @@ export default {
     productQuantity() {
       return this.$store.getters['Quotation/productQuantity']
     },
+    draggableOptions() {
+      return {
+        handle: '.sortable',
+      }
+    },
   },
   watch: {
     products: {
@@ -65,11 +88,12 @@ export default {
       handler() {
         if(_isEqual(this.products, this.storeProducts)) return
         this.$store.dispatch('Quotation/setProducts', _cloneDeep(this.products))
-        localStorage.set('quotation_products', this.info)
+        localStorage.set('quotation_products', this.products)
       },
     }
   },
   components: {
+    VueDraggable,
     ProductItem,
   },
 }

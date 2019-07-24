@@ -7,15 +7,27 @@
     </transition>
 
     <Toolbar></Toolbar>
+    <VuePNotify :options="notifyOptions"></VuePNotify>
   </div>
 </template>
 
 <script lang="babel" type="text/babel">
+import Vue from 'vue'
+import VuePNotify from 'vue-pnotify'
+Vue.use(VuePNotify)
 import bootstrap from 'bootstrap/dist/js/bootstrap.js'
 import AppLoading from 'Components/Loading/DoubleBounce.vue'
 import Toolbar from 'Modules/Toolbar/Toolbar.vue'
 export default {
   name: 'App',
+  data() {
+    return {
+      notifyOptions: {
+        defaultStyle: 'success',
+        zIndex: 99000,
+      },
+    }
+  },
   computed: {
     loading: function () {
       return this.$store.getters['Base/loading']
@@ -28,6 +40,7 @@ export default {
 }
 </script>
 
+<style src="vue-pnotify/dist/vue-pnotify.css"></style>
 <style src="bootstrap/dist/css/bootstrap.min.css"></style>
 <style src="font-awesome/css/font-awesome.min.css"></style>
 <style lang="sass" type="text/sass">

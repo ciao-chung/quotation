@@ -1,8 +1,14 @@
 <template>
   <div class="quotation-product-item" v-if="localProduct">
+    <div class="control">
+      <i class="fa fa-bars sortable"></i>
+      <i class="fa fa-trash remove" @click="remove"></i>
+    </div>
+
     <div class="form-group">
       <label>名稱</label>
-      <textarea class="form-control" v-model="localProduct.name"></textarea>
+      <!--<textarea class="form-control" v-model="localProduct.name"></textarea>-->
+      <input type="text" class="form-control" v-model="localProduct.name">
     </div>
 
     <div class="form-group inline">
@@ -48,6 +54,11 @@ export default {
   created() {
     this.localProduct = _cloneDeep(this.product)
   },
+  methods: {
+    remove() {
+      this.$emit('removeProduct', this.index)
+    }
+  },
   computed: {
     sum() {
       return this.localProduct.price*this.localProduct.quantity
@@ -79,7 +90,19 @@ export default {
 .quotation-product-item
   border: 1px $light-gray solid
   border-radius: 10px
-  padding: 10px 10px
+  padding: 0 10px
+  padding-top: 15px
+  margin-bottom: 20px
+  .control
+    margin-bottom: 10px
+    font-size: 16px
+    &>*
+      margin-right: 15px
+      cursor: pointer
+    .sortable
+      color: $orange
+    .remove
+      color: $red
   textarea
     min-height: 100px
   .inline
