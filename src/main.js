@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from 'App'
 import router from 'router'
 import store from 'Store/Store'
-
+import 'Libs/ExposeLodashPlugin'
 Vue.config.productionTip = false
 
 import $ from 'jquery'

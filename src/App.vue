@@ -5,12 +5,15 @@
     <transition name="transition-loading">
       <AppLoading v-if="loading"/>
     </transition>
+
+    <Toolbar></Toolbar>
   </div>
 </template>
 
 <script lang="babel" type="text/babel">
 import bootstrap from 'bootstrap/dist/js/bootstrap.js'
 import AppLoading from 'Components/Loading/DoubleBounce.vue'
+import Toolbar from 'Modules/Toolbar/Toolbar.vue'
 export default {
   name: 'App',
   computed: {
@@ -20,6 +23,7 @@ export default {
   },
   components: {
     AppLoading,
+    Toolbar,
   },
 }
 </script>
