@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="preview">
     <div class="export-zone">
       <table class="table">
         <tbody>
@@ -115,7 +115,7 @@ import moment from 'moment'
 export default {
   methods: {
     async downloadImage() {
-      const now = moment().format('YYYY/MM/DD_HH:mm:ss')
+      const now = moment().format('YYYY/MM/DD HH:mm:ss')
       const $element = $('.export-zone')[0]
       try {
         const canvas = await html2canvas($element)
@@ -174,4 +174,6 @@ export default {
 .action
   &>*
     margin-right: 20px
+.preview
+  margin-bottom: 200px
 </style>

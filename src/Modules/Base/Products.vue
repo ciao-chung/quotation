@@ -32,15 +32,7 @@ export default {
   },
   methods: {
     init() {
-      const storageProducts = localStorage.get('quotation_products')
-      if(storageProducts) {
-        this.products = storageProducts
-      }
-
-      else if(!storageProducts) {
-        this.products = _cloneDeep(this.storeProducts)
-      }
-
+      this.products = _cloneDeep(this.storeProducts)
       this.$nextTick(() => {
         if(this.productQuantity == 0) this.createDefaultProduct()
       })

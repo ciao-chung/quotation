@@ -53,15 +53,7 @@ export default {
   },
   methods: {
     init() {
-      const storageInfo = localStorage.get('quotation_info')
-      if(storageInfo) {
-        this.info = storageInfo
-      }
-
-      else if(!storageInfo) {
-        this.info = _cloneDeep(this.storeInfo)
-      }
-
+      this.info = _cloneDeep(this.storeInfo)
       this.$nextTick(() => {
         if(this.hasAnyInfoEmpty) this.show = true
       })
