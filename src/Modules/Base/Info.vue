@@ -36,6 +36,7 @@
 </template>
 
 <script lang="babel" type="text/babel">
+import localStorage from 'Libs/Storage/localStorage.js'
 export default {
   data() {
     return {
@@ -52,8 +53,18 @@ export default {
   },
   methods: {
     init() {
-      if(this.hasAnyInfoEmpty) this.show = true
-      this.info = _cloneDeep(this.storeInfo)
+      const storageInfo = localStorage.get('quotation_info')
+      if(storageInfo) {
+        this.info = storageInfo
+      }
+
+      else if(!storageInfo) {
+        this.info = _cloneDeep(this.storeInfo)
+      }
+
+      this.$nextTick(() => {
+        if(this.hasAnyInfoEmpty) this.show = true
+      })
     },
     toggleInfo() {
       this.show = !this.show
@@ -78,6 +89,7 @@ export default {
       handler() {
         if(_isEqual(this.info, this.storeInfo)) return
         this.$store.dispatch('Quotation/setInfo', _cloneDeep(this.info))
+        localStorage.set('quotation_info', this.info)
       },
     }
   },
