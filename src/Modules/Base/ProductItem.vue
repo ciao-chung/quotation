@@ -93,6 +93,7 @@ export default {
   padding: 0 10px
   padding-top: 15px
   margin-bottom: 20px
+  background-color: $white
   .control
     margin-bottom: 10px
     font-size: 16px
