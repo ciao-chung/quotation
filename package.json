@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "bootstrap": "4.3",
+    "downloadjs": "^1.4.7",
     "font-awesome": "^4.7.0",
+    "html2canvas": "^1.0.0-rc.3",
     "jquery": "^3.3.1",
     "lodash": "^4.17.15",
     "vue": "^2.5.2",

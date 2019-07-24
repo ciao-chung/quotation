@@ -48,4 +48,7 @@ export default {
     transition: all 0.5s ease
   &-enter, &-leave-active
     opacity: 0
+@media print
+  .no-print, .no-print *
+    display: none !important
 </style>

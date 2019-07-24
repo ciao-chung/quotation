@@ -1,5 +1,5 @@
 <template>
-  <div class="toolbar">
+  <div class="toolbar no-print">
     <div class="form-group">
       <button class="btn btn-warning" @click="toggleInfo" v-if="!preview">
         <i class="fa fa-info-circle"></i>

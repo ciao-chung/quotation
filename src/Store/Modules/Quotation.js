@@ -54,16 +54,20 @@ export default {
       return state.preview
     },
     // 合計
-    productsPriceSum() {
-
+    productsPriceSum(state) {
+      let result = 0
+      for(const product of state.products) {
+        result += parseInt(product.price)
+      }
+      return result
     },
     // 營業稅
-    tax() {
-
-    },
-    // 總計
-    total() {
-
+    tax(state) {
+      let productsPriceSum = 0
+      for(const product of state.products) {
+        productsPriceSum += parseInt(product.price)
+      }
+      return productsPriceSum*state.taxRate
     },
   },
 }
