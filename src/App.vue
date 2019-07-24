@@ -15,7 +15,6 @@
 import Vue from 'vue'
 import VuePNotify from 'vue-pnotify'
 Vue.use(VuePNotify)
-import bootstrap from 'bootstrap/dist/js/bootstrap.js'
 import AppLoading from 'Components/Loading/DoubleBounce.vue'
 import Toolbar from 'Modules/Toolbar/Toolbar.vue'
 export default {
