@@ -115,12 +115,12 @@ import moment from 'moment'
 export default {
   methods: {
     async downloadImage() {
-      const now = moment().format('YYYY-MM-DD HH:mm:ss')
+      const now = moment().format('YYYY/MM/DD_HH:mm:ss')
       const $element = $('.export-zone')[0]
       try {
         const canvas = await html2canvas($element)
         const base64Url = canvas.toDataURL('image/jpeg', 1.0)
-        downloadjs(base64Url, `${this.storeInfo.companyName}報價單 ${now}.jpg`, 'image/jpeg')
+        downloadjs(base64Url, `${this.storeInfo.companyName}報價單_${now}.jpg`, 'image/jpeg')
         this.$notify('匯出成功!')
       } catch (error) {
         console.warn(error)
