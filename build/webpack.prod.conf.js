@@ -130,6 +130,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     new WebpackShellPlugin({
       onBuildStart: [
         `rm -rf ${config.build.assetsRoot}`,
+        `rm -rf docs`,
+      ],
+      onBuildEnd: [
+        `mv dist docs`
       ],
     }),
   ]
