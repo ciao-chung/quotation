@@ -3,6 +3,7 @@
     <h3>服務項目</h3>
 
     <ProductItem v-for="product, index in products"
+      @updateProduct="updateProduct"
       :key="index"
       :index="index"
       :product="product"></ProductItem>
@@ -10,6 +11,7 @@
 </template>
 
 <script lang="babel" type="text/babel">
+import localStorage from 'Libs/Storage/localStorage.js'
 import ProductItem from 'Modules/Base/ProductItem.vue'
 export default {
   data() {
@@ -22,7 +24,15 @@ export default {
   },
   methods: {
     init() {
-      this.products = _cloneDeep(this.storeProducts)
+      const storageProducts = localStorage.get('quotation_products')
+      if(storageProducts) {
+        this.products = storageProducts
+      }
+
+      else if(!storageProducts) {
+        this.products = _cloneDeep(this.storeProducts)
+      }
+
       if(this.productQuantity == 0) this.createDefaultProduct()
     },
     createDefaultProduct() {
@@ -36,6 +46,9 @@ export default {
         price: 0,
         sum: 0,
       }
+    },
+    updateProduct(data) {
+      this.$set(this.products, data.index, data.product)
     },
   },
   computed: {
@@ -52,6 +65,7 @@ export default {
       handler() {
         if(_isEqual(this.products, this.storeProducts)) return
         this.$store.dispatch('Quotation/setProducts', _cloneDeep(this.products))
+        localStorage.set('quotation_products', this.info)
       },
     }
   },

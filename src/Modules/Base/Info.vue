@@ -30,7 +30,7 @@
     </div>
 
     <div class="alert alert-info" v-show="!show">
-      點選右邊 <i class="fa fa-info-circle"></i> 資訊按鈕可展開主要資料設定
+      點選右邊"橘色"<i class="fa fa-info-circle"></i> 資訊按鈕可展開主要資料設定
     </div>
   </div>
 </template>
