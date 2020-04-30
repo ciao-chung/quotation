@@ -18,7 +18,7 @@
     "downloadjs": "^1.4.7",
     "font-awesome": "^4.7.0",
     "html2canvas": "1.0.0-alpha.12",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.15",
     "vue": "^2.5.2",
     "vue-meta": "^1.5.2",
